@@ -1,0 +1,39 @@
+﻿<Window x:Class="MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:departments="clr-namespace:Modules.Departments.Views"
+    xmlns:courses="clr-namespace:Modules.Courses.Views"
+    xmlns:persons="clr-namespace:Modules.Persons.Views"
+    xmlns:oa="clr-namespace:Modules.OfficeAssigments.Views"
+    xmlns:oc="clr-namespace:Modules.OnlineCourses.Views"
+    xmlns:onc="clr-namespace:Modules.OnsiteCourses.Views"
+    xmlns:sg="clr-namespace:Modules.StudentGrades.Views"
+    Title="MainWindow" Height="377" Width="568">
+    <Grid>
+        <TabControl>
+            <TabItem Header="Departments">
+                <departments:DepartmentsList x:Name="DepartmenstUserControl"/>
+            </TabItem>
+            <TabItem Header="Courses">
+                <courses:CoursesControl x:Name="CoursesControl"/>
+            </TabItem>
+            <TabItem Header="Persons">
+                <persons:PersonsControl x:Name="PersonsControl"/>
+            </TabItem>
+            <TabItem Header="Office Assigments">
+                <oa:OficceAssigmentControl x:Name="OfficeAssigmentControl"/>
+            </TabItem>
+            <TabItem Header="Online Courses">
+                <oc:OnlineCourseControl x:Name="OnlineCoursesControl"/>
+            </TabItem>
+            <TabItem Header="Onsite Courses">
+                <onc:OnsiteCourseControl x:Name="OnsiteCoursesControl"/>
+            </TabItem>
+            <TabItem Header="Student Grades">
+                <sg:StudentGradeControl x:Name="StudentGradesControl"/>
+            </TabItem>
+        </TabControl>
+
+        
+    </Grid>
+</Window>

@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="Modules.StudentGrades.Views.StudentGradeControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="348" d:DesignWidth="569">
+    <Grid Name="StudentGradesGrid">
+        <DataGrid HorizontalAlignment="Left" Margin="25,30,0,0" VerticalAlignment="Top"
+                  ItemsSource="{Binding StudentGrades}" Height="284" Width="512"
+                  AutoGenerateColumns="false" RowDetailsVisibilityMode="VisibleWhenSelected">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="EnrollmentID" Binding="{Binding Path=EnrollmentID}" Header="Enrollment ID" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="CourseIDColumn" Binding="{Binding Path=CourseID}" Header="Course ID" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="StudentIDColumn" Binding="{Binding Path=StudentID}" Header="Student ID" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="GradeColumn" Binding="{Binding Path=Grade}" Header="Grade" Width="SizeToHeader"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>
