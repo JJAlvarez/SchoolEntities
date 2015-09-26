@@ -10,7 +10,7 @@
                   ItemsSource="{Binding OnsiteCourses}" Height="284" Width="512"
                   AutoGenerateColumns="false" RowDetailsVisibilityMode="VisibleWhenSelected">
             <DataGrid.Columns>
-                <DataGridTextColumn x:Name="IdColumn" Binding="{Binding Path=CourseID}" Header="ID" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="CourseColumn" Binding="{Binding Path=Course.Title}" Header="Course" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="LocationColumn" Binding="{Binding Path=Location}" Header="Location" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="DaysColumn" Binding="{Binding Path=Days}" Header="Days" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="TimeColumn" Binding="{Binding Path=Time}" Header="Time" Width="SizeToHeader"/>

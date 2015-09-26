@@ -10,7 +10,7 @@
                   ItemsSource="{Binding OnlineCourses}" Height="284" Width="512"
                   AutoGenerateColumns="false" RowDetailsVisibilityMode="VisibleWhenSelected">
             <DataGrid.Columns>
-                <DataGridTextColumn x:Name="IdColumn" Binding="{Binding Path=CourseID}" Header="ID" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="CourseColumn" Binding="{Binding Path=Course.Title}" Header="Course" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="URLColumn" Binding="{Binding Path=URL}" Header="URL" Width="SizeToHeader"/>
             </DataGrid.Columns>
         </DataGrid>
