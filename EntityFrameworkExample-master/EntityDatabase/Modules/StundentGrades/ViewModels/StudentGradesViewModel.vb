@@ -9,6 +9,10 @@ Namespace Modules.StudentGrades.ViewModels
 
         Private _StudentGrades As ObservableCollection(Of StudentGrade)
         Private dataAccess As IStudentGradeService
+        Private _studentGrade As StudentGrade
+        Private _agregar As ICommand
+        Private _eliminar As ICommand
+        Private _editar As ICommand
 
         Public Property StudentGrades As ObservableCollection(Of StudentGrade)
             Get
@@ -17,6 +21,16 @@ Namespace Modules.StudentGrades.ViewModels
             Set(value As ObservableCollection(Of StudentGrade))
                 Me._StudentGrades = value
                 OnPropertyChanged("StudentGrades")
+            End Set
+        End Property
+
+        Public Property StudentGrade As StudentGrade
+            Get
+                Return Me._studentGrade
+            End Get
+            Set(value As StudentGrade)
+                Me._studentGrade = value
+                OnPropertyChanged("StudentGrade")
             End Set
         End Property
 
@@ -36,6 +50,52 @@ Namespace Modules.StudentGrades.ViewModels
             For Each element In Me.GetAllStudentGrades
                 Me._StudentGrades.Add(element)
             Next
+        End Sub
+
+        Public ReadOnly Property ButtonAgregar
+            Get
+                If _agregar Is Nothing Then
+                    _agregar = New RelayCommand(AddressOf Agregar)
+                End If
+                Return _agregar
+            End Get
+        End Property
+
+        Public ReadOnly Property ButtonEliminar
+            Get
+                If _eliminar Is Nothing Then
+                    _eliminar = New RelayCommand(AddressOf Eliminar)
+                End If
+                Return _eliminar
+            End Get
+        End Property
+
+        Public ReadOnly Property ButtonEditar
+            Get
+                If _editar Is Nothing Then
+                    _editar = New RelayCommand(AddressOf Editar)
+                End If
+                Return _editar
+            End Get
+        End Property
+
+        Public Sub Agregar()
+            Dim editar As New EditStudentGrades
+            editar.ShowDialog()
+        End Sub
+
+        Public Sub Eliminar()
+            If StudentGrade IsNot Nothing Then
+                dataAccess.DeleteStudentGrade(StudentGrade)
+                _StudentGrades.Remove(StudentGrade)
+                MsgBox("Student Grade succesful deleted.", MsgBoxStyle.Information, "School System")
+            Else
+                MsgBox("Please select an Student Grade.", MsgBoxStyle.Critical, "School System")
+            End If
+        End Sub
+
+        Public Sub Editar()
+
         End Sub
     End Class
 End Namespace

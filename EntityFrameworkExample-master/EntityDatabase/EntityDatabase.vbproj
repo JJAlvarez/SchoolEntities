@@ -84,6 +84,7 @@
       <DependentUpon>Application.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="BusinessLogic\Helpers\RelayCommand.vb" />
     <Compile Include="BusinessLogic\Helpers\ViewModelBase.vb" />
     <Compile Include="BusinessLogic\Services\Implementations\CourseService.vb" />
     <Compile Include="BusinessLogic\Services\Implementations\DepartmentService.vb" />
@@ -145,7 +146,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Modules\Courses\Views\EditCourse.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Modules\Departments\Views\DepartmentsList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\Departments\Views\EditDepartment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\OficceAssigments\Views\EditOfficeAssigment.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -153,7 +166,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Modules\OnlineCourses\Views\EditOnlineCourse.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Modules\OnlineCourses\Views\OnlineCourseControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\OnsiteCourse\Views\EditOnsiteCourse.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -161,7 +182,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Modules\Persons\Views\EditPerson.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Modules\Persons\Views\PersonsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\StundentGrades\Views\EditStudentGrades.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -191,30 +220,55 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Modules\Courses\ViewModels\CoursesViewModel.vb" />
+    <Compile Include="Modules\Courses\ViewModels\EditCourseViewModel.vb" />
     <Compile Include="Modules\Courses\Views\CoursesControl.xaml.vb">
       <DependentUpon>CoursesControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Modules\Courses\Views\EditCourse.xaml.vb">
+      <DependentUpon>EditCourse.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Modules\Departments\ViewModels\DepartmentsViewModel.vb" />
+    <Compile Include="Modules\Departments\ViewModels\EditDepartmentViewModel.vb" />
     <Compile Include="Modules\Departments\Views\DepartmentsList.xaml.vb">
       <DependentUpon>DepartmentsList.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Modules\Departments\Views\EditDepartment.xaml.vb">
+      <DependentUpon>EditDepartment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\OficceAssigments\ViewModels\EditOfficeAssigmentViewModel.vb" />
     <Compile Include="Modules\OficceAssigments\ViewModels\OfficeAssigmentViewModel.vb" />
+    <Compile Include="Modules\OficceAssigments\Views\EditOfficeAssigment.xaml.vb">
+      <DependentUpon>EditOfficeAssigment.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Modules\OficceAssigments\Views\OficceAssigmentControl.xaml.vb">
       <DependentUpon>OficceAssigmentControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Modules\OnlineCourses\View Models\EditOnlineCourseViewModel.vb" />
     <Compile Include="Modules\OnlineCourses\View Models\OnlineCoursesViewModel.vb" />
+    <Compile Include="Modules\OnlineCourses\Views\EditOnlineCourse.xaml.vb">
+      <DependentUpon>EditOnlineCourse.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Modules\OnlineCourses\Views\OnlineCourseControl.xaml.vb">
       <DependentUpon>OnlineCourseControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\OnsiteCourse\ViewModels\OnsiteCourseViewModel.vb" />
+    <Compile Include="Modules\OnsiteCourse\Views\EditOnsiteCourse.xaml.vb">
+      <DependentUpon>EditOnsiteCourse.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Modules\OnsiteCourse\Views\OnsiteCourseControl.xaml.vb">
       <DependentUpon>OnsiteCourseControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\Persons\ViewModels\PersonsViewModel.vb" />
+    <Compile Include="Modules\Persons\Views\EditPerson.xaml.vb">
+      <DependentUpon>EditPerson.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Modules\Persons\Views\PersonsControl.xaml.vb">
       <DependentUpon>PersonsControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\StundentGrades\ViewModels\StudentGradesViewModel.vb" />
+    <Compile Include="Modules\StundentGrades\Views\EditStudentGrades.xaml.vb">
+      <DependentUpon>EditStudentGrades.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Modules\StundentGrades\Views\StudentGradeControl.xaml.vb">
       <DependentUpon>StudentGradeControl.xaml</DependentUpon>
     </Compile>

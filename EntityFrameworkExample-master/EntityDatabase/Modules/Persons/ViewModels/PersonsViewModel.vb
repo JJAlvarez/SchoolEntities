@@ -9,6 +9,10 @@ Namespace Modules.Persons.ViewModels
 
         Private _Persons As ObservableCollection(Of Person)
         Private dataAccess As IPersonService
+        Private _person As Person
+        Private _agregar As ICommand
+        Private _eliminar As ICommand
+        Private _editar As ICommand
 
         Public Property Persons As ObservableCollection(Of Person)
             Get
@@ -17,6 +21,16 @@ Namespace Modules.Persons.ViewModels
             Set(value As ObservableCollection(Of Person))
                 Me._Persons = value
                 OnPropertyChanged("Persons")
+            End Set
+        End Property
+
+        Public Property Person As Person
+            Get
+                Return Me._person
+            End Get
+            Set(value As Person)
+                Me._person = value
+                OnPropertyChanged("Person")
             End Set
         End Property
 
@@ -36,6 +50,50 @@ Namespace Modules.Persons.ViewModels
             For Each element In Me.GetAllPersons
                 Me._Persons.Add(element)
             Next
+        End Sub
+
+        Public ReadOnly Property ButtonAgregar
+            Get
+                If _agregar Is Nothing Then
+                    _agregar = New RelayCommand(AddressOf Agregar)
+                End If
+                Return _agregar
+            End Get
+        End Property
+
+        Public ReadOnly Property ButtonEliminar
+            Get
+                If _eliminar Is Nothing Then
+                    _eliminar = New RelayCommand(AddressOf Eliminar)
+                End If
+                Return _eliminar
+            End Get
+        End Property
+
+        Public ReadOnly Property ButtonEditar
+            Get
+                If _editar Is Nothing Then
+                    _editar = New RelayCommand(AddressOf Editar)
+                End If
+                Return _editar
+            End Get
+        End Property
+
+        Public Sub Agregar()
+            Dim editar As New EditPerson
+            editar.ShowDialog()
+        End Sub
+
+        Public Sub Eliminar()
+            If Person IsNot Nothing Then
+                dataAccess.DeletePerson(Person)
+            Else
+                MsgBox("Please select a Person.", MsgBoxStyle.Critical, "School System")
+            End If
+        End Sub
+
+        Public Sub Editar()
+
         End Sub
     End Class
 End Namespace

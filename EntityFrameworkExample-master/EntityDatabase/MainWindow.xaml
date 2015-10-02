@@ -8,7 +8,7 @@
     xmlns:oc="clr-namespace:Modules.OnlineCourses.Views"
     xmlns:onc="clr-namespace:Modules.OnsiteCourses.Views"
     xmlns:sg="clr-namespace:Modules.StudentGrades.Views"
-    Title="MainWindow" Height="377" Width="568">
+    Title="MainWindow" Height="480" Width="569">
     <Grid>
         <TabControl>
             <TabItem Header="Departments">

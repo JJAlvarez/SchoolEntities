@@ -4,10 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="348" d:DesignWidth="569">
-    <Grid Name="MainGrid">
+             d:DesignHeight="480" d:DesignWidth="569">
+    <Grid Name="MainGrid" Margin="0,0,0,0">
         <DataGrid HorizontalAlignment="Left" Margin="25,30,0,0" VerticalAlignment="Top"
-                  ItemsSource="{Binding Departments}" Height="284" Width="512"
+                  ItemsSource="{Binding Departments}" Height="284" Width="512" SelectedItem="{Binding Department}"
                   AutoGenerateColumns="false" RowDetailsVisibilityMode="VisibleWhenSelected">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="DepartmentIdColumn" Binding="{Binding Path=DepartmentID}" Header="ID" Width="SizeToHeader"/>
@@ -15,5 +15,6 @@
                 <DataGridTextColumn x:Name="BudgetColumn" Binding="{Binding Path=Budget}" Header="Budget" Width="SizeToHeader"/>
             </DataGrid.Columns>
         </DataGrid>
+        <Button Command="{Binding ButtonAgregar}" Content="Agregar" HorizontalAlignment="Left" Margin="254,330,0,0" VerticalAlignment="Top" Width="75" Height="50"/>
     </Grid>
 </UserControl>
