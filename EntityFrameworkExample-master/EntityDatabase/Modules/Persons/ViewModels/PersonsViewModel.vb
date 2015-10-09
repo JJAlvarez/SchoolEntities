@@ -2,6 +2,7 @@
 Imports BusinessLogic.Services.Implementations
 Imports BusinessLogic.Services.Interfaces
 Imports System.Collections.ObjectModel
+Imports Modules.Persons.Views
 
 Namespace Modules.Persons.ViewModels
     Public Class PersonsViewModel
@@ -80,8 +81,13 @@ Namespace Modules.Persons.ViewModels
         End Property
 
         Public Sub Agregar()
-            Dim editar As New EditPerson
+            Dim editar As New EditPerson("Agregar", Person)
             editar.ShowDialog()
+            _Persons.Clear()
+
+            For Each element In Me.GetAllPersons
+                _Persons.Add(element)
+            Next
         End Sub
 
         Public Sub Eliminar()
@@ -93,7 +99,17 @@ Namespace Modules.Persons.ViewModels
         End Sub
 
         Public Sub Editar()
+            If Person IsNot Nothing Then
+                Dim editar As New EditPerson("Editar", Person)
+                editar.ShowDialog()
+                _Persons.Clear()
 
+                For Each element In Me.GetAllPersons
+                    _Persons.Add(element)
+                Next
+            Else
+                MsgBox("Please select a Person.", MsgBoxStyle.Critical, "School System")
+            End If
         End Sub
     End Class
 End Namespace

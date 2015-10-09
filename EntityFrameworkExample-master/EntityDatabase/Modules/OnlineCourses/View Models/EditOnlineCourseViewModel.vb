@@ -14,8 +14,10 @@ Namespace Modules.OnlineCourses.ViewModels
         Private _curso As Course
         Private _cursos As ObservableCollection(Of Course)
         Private _url As String
+        Private opcion As String
+        Private onlineCourse As OnlineCourse
 
-        Public Sub New(ventana As EditOnlineCourse)
+        Public Sub New(ventana As EditOnlineCourse, opcion As String, onlineCourse As OnlineCourse)
             ' Register service with ServiceLocator
             ServiceLocator.RegisterService(Of IOnlineCourseService)(New OnlineCourseService)
             ' Initialize dataAccess from service
@@ -27,6 +29,14 @@ Namespace Modules.OnlineCourses.ViewModels
                 _cursos.Add(element)
             Next
             _ventana = ventana
+            Me.opcion = opcion
+            Me.onlineCourse = onlineCourse
+            If opcion = "Editar" Then
+                Curso = onlineCourse.Course
+                URL = onlineCourse.URL
+                Cursos.Clear()
+                Cursos.Add(Curso)
+            End If
         End Sub
 
         Public Property URL As String
@@ -62,7 +72,11 @@ Namespace Modules.OnlineCourses.ViewModels
         Public ReadOnly Property ButtonAgregar
             Get
                 If _agregar Is Nothing Then
-                    _agregar = New RelayCommand(AddressOf Agregar)
+                    If opcion = "Agregar" Then
+                        _agregar = New RelayCommand(AddressOf Agregar)
+                    Else
+                        _agregar = New RelayCommand(AddressOf Editar)
+                    End If
                 End If
                 Return _agregar
             End Get
@@ -75,6 +89,20 @@ Namespace Modules.OnlineCourses.ViewModels
                 agregar.URL = URL
                 _dataAccess.CreateOnlineCourse(agregar)
                 MsgBox("Online Course succesful created.", MsgBoxStyle.Information, "School")
+                _ventana.Close()
+            Else
+                MsgBox("Ingrese todos los datos", MsgBoxStyle.Information, "School")
+            End If
+
+        End Sub
+
+        Public Sub Editar()
+            If URL <> Nothing And Curso IsNot Nothing Then
+                Dim agregar As New OnlineCourse
+                agregar.CourseID = Curso.CourseID
+                agregar.URL = URL
+                _dataAccess.EditOnlineCourse(agregar)
+                MsgBox("Online Course succesful edited.", MsgBoxStyle.Information, "School")
                 _ventana.Close()
             Else
                 MsgBox("Ingrese todos los datos", MsgBoxStyle.Information, "School")

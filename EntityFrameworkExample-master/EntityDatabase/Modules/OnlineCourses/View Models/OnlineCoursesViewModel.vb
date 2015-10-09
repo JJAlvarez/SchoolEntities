@@ -80,7 +80,7 @@ Namespace Modules.OnlineCourses.ViewModels
         End Property
 
         Public Sub Agregar()
-            Dim editar As New EditOnlineCourse
+            Dim editar As New EditOnlineCourse("Agregar", OnlineCourse)
             editar.ShowDialog()
 
             _onlineCourses.Clear()
@@ -100,7 +100,17 @@ Namespace Modules.OnlineCourses.ViewModels
         End Sub
 
         Public Sub Editar()
+            If OnlineCourse IsNot Nothing Then
+                Dim editar As New EditOnlineCourse("Editar", OnlineCourse)
+                editar.ShowDialog()
 
+                _onlineCourses.Clear()
+                For Each element In Me.GetAllOnlineCourses
+                    Me._onlineCourses.Add(element)
+                Next
+            Else
+                MsgBox("Please selct an Online Course.", MsgBoxStyle.Critical, "School System")
+            End If
         End Sub
     End Class
 End Namespace

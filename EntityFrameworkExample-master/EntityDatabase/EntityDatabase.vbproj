@@ -251,6 +251,7 @@
     <Compile Include="Modules\OnlineCourses\Views\OnlineCourseControl.xaml.vb">
       <DependentUpon>OnlineCourseControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Modules\OnsiteCourse\ViewModels\EditOnsiteCourseViewModel.vb" />
     <Compile Include="Modules\OnsiteCourse\ViewModels\OnsiteCourseViewModel.vb" />
     <Compile Include="Modules\OnsiteCourse\Views\EditOnsiteCourse.xaml.vb">
       <DependentUpon>EditOnsiteCourse.xaml</DependentUpon>
@@ -258,6 +259,7 @@
     <Compile Include="Modules\OnsiteCourse\Views\OnsiteCourseControl.xaml.vb">
       <DependentUpon>OnsiteCourseControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Modules\Persons\ViewModels\EditPersonViewModel.vb" />
     <Compile Include="Modules\Persons\ViewModels\PersonsViewModel.vb" />
     <Compile Include="Modules\Persons\Views\EditPerson.xaml.vb">
       <DependentUpon>EditPerson.xaml</DependentUpon>
@@ -265,6 +267,7 @@
     <Compile Include="Modules\Persons\Views\PersonsControl.xaml.vb">
       <DependentUpon>PersonsControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Modules\StundentGrades\ViewModels\EditStudentGradeViewModel.vb" />
     <Compile Include="Modules\StundentGrades\ViewModels\StudentGradesViewModel.vb" />
     <Compile Include="Modules\StundentGrades\Views\EditStudentGrades.xaml.vb">
       <DependentUpon>EditStudentGrades.xaml</DependentUpon>

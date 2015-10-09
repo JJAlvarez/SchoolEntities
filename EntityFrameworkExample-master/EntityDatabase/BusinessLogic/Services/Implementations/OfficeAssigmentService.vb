@@ -20,7 +20,10 @@ Namespace BusinessLogic.Services.Implementations
         End Sub
 
         Public Sub EditOfficeAssigment(oAssigment As OfficeAssignment, oAssigmentE As OfficeAssignment) Implements IOfficeAssigment.EditOfficeAssigment
-            oAssigment = oAssigmentE
+            oAssigment = (From oa In DataContext.DBEntities.OfficeAssignments
+                          Where oa.InstructorID = oAssigment.InstructorID And oa.Location = oAssigment.Location).FirstOrDefault
+            oAssigment.InstructorID = oAssigmentE.InstructorID
+            oAssigment.Location = oAssigmentE.Location
             DataContext.DBEntities.SaveChanges()
         End Sub
     End Class

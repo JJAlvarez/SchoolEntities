@@ -79,7 +79,7 @@ Namespace Modules.Courses.ViewModels
         End Property
 
         Public Sub Agregar()
-            Dim editar As New Modules.Courses.Views.EditCourse
+            Dim editar As New Modules.Courses.Views.EditCourse("Agregar", Course)
             editar.ShowDialog()
             _courses.Clear()
             For Each element In Me.GetAllCourses
@@ -98,7 +98,16 @@ Namespace Modules.Courses.ViewModels
         End Sub
 
         Public Sub Editar()
-
+            If Course IsNot Nothing Then
+                Dim editar As New Modules.Courses.Views.EditCourse("Editar", Course)
+                editar.ShowDialog()
+                _courses.Clear()
+                For Each element In Me.GetAllCourses
+                    Me._courses.Add(element)
+                Next
+            Else
+                MsgBox("Please select a Course.", MsgBoxStyle.Critical, "School System")
+            End If
         End Sub
     End Class
 End Namespace

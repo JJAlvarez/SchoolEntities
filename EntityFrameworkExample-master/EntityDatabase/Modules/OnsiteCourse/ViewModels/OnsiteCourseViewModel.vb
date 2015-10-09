@@ -2,6 +2,7 @@
 Imports BusinessLogic.Services.Implementations
 Imports BusinessLogic.Services.Interfaces
 Imports System.Collections.ObjectModel
+Imports Modules.OnsiteCourse.Views
 
 Namespace Modules.OnsiteCourse.ViewModels
     Public Class OnsiteCourseViewModel
@@ -79,8 +80,12 @@ Namespace Modules.OnsiteCourse.ViewModels
         End Property
 
         Public Sub Agregar()
-            Dim editar As New EditOnsiteCourse
+            Dim editar As New EditOnsiteCourse("Agregar", OnsiteCourse)
             editar.ShowDialog()
+            _onsiteCourses.Clear()
+            For Each element In Me.GetAllOnsiteCourses
+                _onsiteCourses.Add(element)
+            Next
         End Sub
 
         Public Sub Eliminar()
@@ -94,7 +99,16 @@ Namespace Modules.OnsiteCourse.ViewModels
         End Sub
 
         Public Sub Editar()
-
+            If OnsiteCourse IsNot Nothing Then
+                Dim editar As New EditOnsiteCourse("Editar", OnsiteCourse)
+                editar.ShowDialog()
+                _onsiteCourses.Clear()
+                For Each element In Me.GetAllOnsiteCourses
+                    _onsiteCourses.Add(element)
+                Next
+            Else
+                MsgBox("Please select a Onsite Course.", MsgBoxStyle.Critical, "School System")
+            End If
         End Sub
     End Class
 End Namespace

@@ -6,7 +6,7 @@
              mc:Ignorable="d" d:DesignWidth="569" Height="401.639">
     <Grid Name="PersonsGrid">
         <DataGrid HorizontalAlignment="Left" Margin="25,30,0,0" VerticalAlignment="Top"
-                  ItemsSource="{Binding Persons}" Height="284" Width="512"
+                  ItemsSource="{Binding Persons}" Height="284" Width="512" SelectedValue="{Binding Person}"
                   AutoGenerateColumns="false" RowDetailsVisibilityMode="VisibleWhenSelected">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="IdColumn" Binding="{Binding Path=PersonID}" Header="ID" Width="SizeToHeader"/>
@@ -16,6 +16,7 @@
                 <DataGridTextColumn x:Name="EnrollmentDateColumns" Binding="{Binding Path=EnrollmentDate}" Header="Enrollment Date" Width="SizeToHeader"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Command="{Binding ButtonAgregar}" Content="Agregar" HorizontalAlignment="Left" Margin="342,330,0,0" VerticalAlignment="Top" Width="75" Height="50"/>
+        <Button Command="{Binding ButtonAgregar}" Content="Agregar" HorizontalAlignment="Left" Margin="269,329,0,0" VerticalAlignment="Top" Width="75" Height="50"/>
+        <Button Command="{Binding ButtonEditar}" Content="Editar" HorizontalAlignment="Left" Margin="367,329,0,0" VerticalAlignment="Top" Width="75" Height="50"/>
     </Grid>
 </UserControl>

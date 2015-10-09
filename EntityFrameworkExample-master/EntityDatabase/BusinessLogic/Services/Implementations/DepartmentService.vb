@@ -1,4 +1,5 @@
-﻿Imports BusinessLogic.Services.Interfaces
+﻿
+Imports BusinessLogic.Services.Interfaces
 Imports BusinessObjects.Helpers
 Namespace BusinessLogic.Services.Implementations
     Public Class DepartmentService
@@ -14,10 +15,21 @@ Namespace BusinessLogic.Services.Implementations
         End Sub
 
         Public Sub DeleteDepartment(department As Department) Implements IDepartmentService.DeleteDepartment
-            Dim courses As IQueryable(Of Course) = (From c In DataContext.DBEntities.Courses Where c.DepartmentID = department.DepartmentID)
-            For Each element In courses
-                DataContext.DBEntities.Courses.Remove(element)
+            For Each element In department.Courses
+                element.People.Clear()
+                element.StudentGrades.Clear()
+                If element.OnlineCourse IsNot Nothing Then
+                    DataContext.DBEntities.OnlineCourses.Remove(element.OnlineCourse)
+                End If
+
+                If element.OnsiteCourse IsNot Nothing Then
+                    DataContext.DBEntities.OnsiteCourse.Remove(element.OnsiteCourse)
+                End If
             Next
+            DataContext.DBEntities.SaveChanges()
+            If department.Courses.Count > 0 Then
+                department.Courses.Clear()
+            End If
             DataContext.DBEntities.SaveChanges()
             DataContext.DBEntities.Departments.Remove(department)
             DataContext.DBEntities.SaveChanges()

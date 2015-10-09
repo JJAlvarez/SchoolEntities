@@ -2,6 +2,7 @@
 Imports BusinessLogic.Services.Implementations
 Imports BusinessLogic.Services.Interfaces
 Imports System.Collections.ObjectModel
+Imports Modules.StudentGrades.Views
 
 Namespace Modules.StudentGrades.ViewModels
     Public Class StudentGradesViewModel
@@ -80,8 +81,12 @@ Namespace Modules.StudentGrades.ViewModels
         End Property
 
         Public Sub Agregar()
-            Dim editar As New EditStudentGrades
+            Dim editar As New EditStudentGrades("Agregar", StudentGrade)
             editar.ShowDialog()
+            _StudentGrades.Clear()
+            For Each element In Me.GetAllStudentGrades
+                _StudentGrades.Add(element)
+            Next
         End Sub
 
         Public Sub Eliminar()
@@ -95,7 +100,16 @@ Namespace Modules.StudentGrades.ViewModels
         End Sub
 
         Public Sub Editar()
-
+            If StudentGrade IsNot Nothing Then
+                Dim editar As New EditStudentGrades("Editar", StudentGrade)
+                editar.ShowDialog()
+                _StudentGrades.Clear()
+                For Each element In Me.GetAllStudentGrades
+                    _StudentGrades.Add(element)
+                Next
+            Else
+                MsgBox("Please select an Student Grade.", MsgBoxStyle.Critical, "School System")
+            End If
         End Sub
     End Class
 End Namespace

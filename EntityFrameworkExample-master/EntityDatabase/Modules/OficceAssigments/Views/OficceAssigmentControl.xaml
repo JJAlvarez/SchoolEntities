@@ -14,7 +14,8 @@
                 <DataGridTextColumn x:Name="LocationColumn" Binding="{Binding Path=Location}" Header="Location" Width="SizeToHeader"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Command="{Binding ButtonAgregar}" Content="Agregar" HorizontalAlignment="Left" Margin="349,330,0,-32" VerticalAlignment="Top" Width="75" Height="50"/>
+        <Button Command="{Binding ButtonAgregar}" Content="Agregar" HorizontalAlignment="Left" Margin="237,330,0,-32" VerticalAlignment="Top" Width="75" Height="50"/>
+        <Button Command="{Binding ButtonEditar}" Content="Editar" HorizontalAlignment="Left" Margin="344,330,0,-32" VerticalAlignment="Top" Width="75" Height="50"/>
         <Button Command="{Binding ButtonEliminar}" Content="Eliminar" HorizontalAlignment="Left" Margin="443,330,0,0" VerticalAlignment="Top" Width="75" Height="50"/>
     </Grid>
 </UserControl>

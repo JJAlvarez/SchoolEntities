@@ -80,7 +80,7 @@ Namespace Modules.Departments.ViewModels
         End Property
 
         Public Sub Agregar()
-            Dim editar As New EditDepartment
+            Dim editar As New EditDepartment("Agregar", Department)
             editar.ShowDialog()
             _departments.Clear()
             For Each element In Me.GetAllDepartments
@@ -91,13 +91,23 @@ Namespace Modules.Departments.ViewModels
         Public Sub Eliminar()
             If Department IsNot Nothing Then
                 dataAccess.DeleteDepartment(Department)
+                _departments.Remove(Department)
             Else
                 MsgBox("Please select a department.", MsgBoxStyle.Critical, "School System")
             End If
         End Sub
 
         Public Sub Editar()
-
+            If Department IsNot Nothing Then
+                Dim editar As New EditDepartment("Editar", Department)
+                editar.ShowDialog()
+                _departments.Clear()
+                For Each element In Me.GetAllDepartments
+                    Me._departments.Add(element)
+                Next
+            Else
+                MsgBox("Please select a department.", MsgBoxStyle.Critical, "School System")
+            End If
         End Sub
     End Class
 End Namespace

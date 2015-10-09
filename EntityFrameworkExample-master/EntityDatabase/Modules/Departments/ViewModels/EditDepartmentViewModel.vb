@@ -15,14 +15,23 @@ Namespace Modules.Departments.ViewModels
         Private _name As String
         Private _budget As String
         Private _startDate As Date
+        Private opcion As String
+        Private departamento As Department
 
-        Public Sub New(ventana As EditDepartment)
+        Public Sub New(ventana As EditDepartment, opcion As String, departamento As Department)
             ' Register service with ServiceLocator
             ServiceLocator.RegisterService(Of IDepartmentService)(New DepartmentService)
             ' Initialize dataAccess from service
             Me._dataAccess = GetService(Of IDepartmentService)()
             ' Populate departments property variable 
             _ventana = ventana
+            Me.departamento = departamento
+            Me.opcion = opcion
+            If Me.opcion = "Editar" Then
+                Name = departamento.Name
+                Budget = departamento.Budget
+                StartDate = departamento.StartDate
+            End If
         End Sub
 
         Public Property Name As String
@@ -58,7 +67,11 @@ Namespace Modules.Departments.ViewModels
         Public ReadOnly Property ButtonAgregar
             Get
                 If _agregar Is Nothing Then
-                    _agregar = New RelayCommand(AddressOf Agregar)
+                    If opcion = "Editar" Then
+                        _agregar = New RelayCommand(AddressOf Editar)
+                    Else
+                        _agregar = New RelayCommand(AddressOf Agregar)
+                    End If
                 End If
                 Return _agregar
             End Get
@@ -80,6 +93,23 @@ Namespace Modules.Departments.ViewModels
                 MsgBox("Ingrese todos los datos", MsgBoxStyle.Information, "School")
             End If
 
+        End Sub
+
+        Public Sub Editar()
+            If Name <> Nothing And Budget <> Nothing Then
+                Dim department As New Department
+                Dim departments As IQueryable(Of Department) = DataContext.DBEntities.Departments
+                department.DepartmentID = departamento.DepartmentID
+                department.Name = Name
+                department.Administrator = departments.ToArray.Length * 5
+                department.Budget = Budget
+                department.StartDate = DateTime.Today
+                _dataAccess.EditDepartment(department)
+                MsgBox("Departement succesful edited.", MsgBoxStyle.Information, "School")
+                _ventana.Close()
+            Else
+                MsgBox("Ingrese todos los datos", MsgBoxStyle.Information, "School")
+            End If
         End Sub
 
     End Class

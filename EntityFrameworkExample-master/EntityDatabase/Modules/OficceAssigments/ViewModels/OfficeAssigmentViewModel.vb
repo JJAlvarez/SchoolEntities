@@ -80,7 +80,7 @@ Namespace Modules.OfficeAssigments.ViewModels
         End Property
 
         Public Sub Agregar()
-            Dim editar As New EditOfficeAssigment
+            Dim editar As New EditOfficeAssigment("Agregar", OfficeAssigment)
             editar.ShowDialog()
             _officeAssigments.Clear()
             For Each element In Me.GetAllOfficeAssigments
@@ -99,7 +99,16 @@ Namespace Modules.OfficeAssigments.ViewModels
         End Sub
 
         Public Sub Editar()
-
+            If OfficeAssigment IsNot Nothing Then
+                Dim editar As New EditOfficeAssigment("Editar", OfficeAssigment)
+                editar.ShowDialog()
+                _officeAssigments.Clear()
+                For Each element In Me.GetAllOfficeAssigments
+                    Me._officeAssigments.Add(element)
+                Next
+            Else
+                MsgBox("Please select an Office Assignment.", MsgBoxStyle.Critical, "School System")
+            End If
         End Sub
     End Class
 End Namespace

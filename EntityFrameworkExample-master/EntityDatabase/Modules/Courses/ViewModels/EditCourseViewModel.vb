@@ -16,6 +16,8 @@ Namespace Modules.Courses.ViewModels
         Private _dataAccess As ICourseService
         Private _agregar As ICommand
         Private _ventana As EditCourse
+        Private opcion As String
+        Private curso As Course
 
         Public Property Titel As String
             Get
@@ -57,14 +59,20 @@ Namespace Modules.Courses.ViewModels
             End Set
         End Property
 
-        Public Sub New(ventana As EditCourse)
+        Public Sub New(ventana As EditCourse, opcion As String, curso As Course)
             ' Register service with ServiceLocator
             ServiceLocator.RegisterService(Of ICourseService)(New CourseService)
             ' Initialize dataAccess from service
             Me._dataAccess = GetService(Of ICourseService)()
             ' Populate departments property variable 
             _departments = New ObservableCollection(Of Department)
-
+            Me.opcion = opcion
+            Me.curso = curso
+            If opcion = "Editar" Then
+                Titel = curso.Title
+                Credits = curso.Credits
+                Department = curso.Department
+            End If
             Dim departments As IQueryable(Of Department) = DataContext.DBEntities.Departments
 
             For Each elemet In departments
@@ -76,7 +84,11 @@ Namespace Modules.Courses.ViewModels
         Public ReadOnly Property ButtonAgregar
             Get
                 If _agregar Is Nothing Then
-                    _agregar = New RelayCommand(AddressOf Agregar)
+                    If opcion = "Agregar" Then
+                        _agregar = New RelayCommand(AddressOf Agregar)
+                    Else
+                        _agregar = New RelayCommand(AddressOf Editar)
+                    End If
                 End If
                 Return _agregar
             End Get
@@ -97,6 +109,22 @@ Namespace Modules.Courses.ViewModels
                 MsgBox("Ingrese todos los datos", MsgBoxStyle.Information, "School")
             End If
 
+        End Sub
+
+        Public Sub Editar()
+            If Titel <> Nothing And Credits <> Nothing And Department IsNot Nothing Then
+                Dim course As New Course
+                Dim courses As IQueryable(Of Course) = DataContext.DBEntities.Courses
+                course.Title = Titel
+                course.CourseID = curso.CourseID
+                course.Credits = Credits
+                course.DepartmentID = Department.DepartmentID
+                _dataAccess.EditCourse(course)
+                MsgBox("Course succesful edited.", MsgBoxStyle.Information, "School")
+                _ventana.Close()
+            Else
+                MsgBox("Ingrese todos los datos", MsgBoxStyle.Information, "School")
+            End If
         End Sub
     End Class
 End Namespace

@@ -11,14 +11,13 @@ Namespace Modules.OficceAssigment.ViewModels
         Private _dataAccess As IOfficeAssigment
         Private _agregar As ICommand
         Private _ventana As EditOfficeAssigment
-        Private _name As String
-        Private _budget As String
-        Private _startDate As Date
         Private _personas As ObservableCollection(Of Person)
         Private _persona As Person
         Private _location As String
+        Private opcion As String
+        Private officeAssigment As OfficeAssignment
 
-        Public Sub New(ventana As EditOfficeAssigment)
+        Public Sub New(ventana As EditOfficeAssigment, opcion As String, officeAssigment As OfficeAssignment)
             ' Register service with ServiceLocator
             ServiceLocator.RegisterService(Of IOfficeAssigment)(New OfficeAssigmentService)
             ' Initialize dataAccess from service
@@ -28,6 +27,14 @@ Namespace Modules.OficceAssigment.ViewModels
             For Each element In listaPersonas
                 _personas.Add(element)
             Next
+            Me.opcion = opcion
+            Me.officeAssigment = officeAssigment
+            If opcion = "Editar" Then
+                Location = officeAssigment.Location
+                Persona = officeAssigment.Person
+                Personas.Clear()
+                Personas.Add(Persona)
+            End If
             ' Populate departments property variable 
             _ventana = ventana
         End Sub
@@ -65,7 +72,12 @@ Namespace Modules.OficceAssigment.ViewModels
         Public ReadOnly Property ButtonAgregar
             Get
                 If _agregar Is Nothing Then
-                    _agregar = New RelayCommand(AddressOf Agregar)
+                    If opcion = "Editar" Then
+                        _agregar = New RelayCommand(AddressOf Editar)
+                    Else
+                        _agregar = New RelayCommand(AddressOf Agregar)
+                    End If
+
                 End If
                 Return _agregar
             End Get
@@ -78,6 +90,20 @@ Namespace Modules.OficceAssigment.ViewModels
                 officeAssigment.InstructorID = Persona.PersonID
                 _dataAccess.CreateOfficeAssigment(officeAssigment)
                 MsgBox("Office Assigment succesful created.", MsgBoxStyle.Information, "School")
+                _ventana.Close()
+            Else
+                MsgBox("Ingrese todos los datos", MsgBoxStyle.Information, "School")
+            End If
+
+        End Sub
+
+        Public Sub Editar()
+            If Location <> Nothing And Persona IsNot Nothing Then
+                Dim officeAssigment As New OfficeAssignment
+                officeAssigment.Location = Location
+                officeAssigment.InstructorID = Persona.PersonID
+                _dataAccess.EditOfficeAssigment(Me.officeAssigment, officeAssigment)
+                MsgBox("Office Assigment succesful edited.", MsgBoxStyle.Information, "School")
                 _ventana.Close()
             Else
                 MsgBox("Ingrese todos los datos", MsgBoxStyle.Information, "School")

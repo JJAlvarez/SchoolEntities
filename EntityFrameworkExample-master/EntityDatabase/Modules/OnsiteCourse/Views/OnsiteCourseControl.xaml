@@ -16,7 +16,9 @@
                 <DataGridTextColumn x:Name="TimeColumn" Binding="{Binding Path=Time}" Header="Time" Width="SizeToHeader"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Command="{Binding ButtonAgregar}" Content="Agregar" HorizontalAlignment="Left" Margin="343,330,0,0" VerticalAlignment="Top" Width="75" Height="50"/>
+        <Button Command="{Binding ButtonAgregar}" Content="Agregar" HorizontalAlignment="Left" Margin="243,330,0,0" VerticalAlignment="Top" Width="75" Height="50"/>
+        <Button Command="{Binding ButtonEditar}" Content="Editar" HorizontalAlignment="Left" Margin="345,330,0,0" VerticalAlignment="Top" Width="75" Height="50"/>
         <Button Command="{Binding ButtonEliminar}" Content="Eliminar" HorizontalAlignment="Left" Margin="443,330,0,0" VerticalAlignment="Top" Width="75" Height="50"/>
+        
     </Grid>
 </UserControl>
